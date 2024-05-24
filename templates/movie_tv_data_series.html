@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie and TV Data</title>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <!-- Header content -->
+    </header>
+    <main class="main-content">
+        <h2>Movie and TV Data</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Movie Rank</th>
+                    <th>Movie Title</th>
+                    <th>Movie Genre</th>
+                    <th>Movie Director</th>
+                    <th>Movie Actors</th>
+                    <th>Year</th>
+                    <th>Movie Rating</th>
+                    <th>Movie Votes</th>
+                    <th>Movie Metascore</th>
+                    <th>Type</th>
+                    <th>TV ID</th>
+                    <th>TV Title</th>
+                    <th>TV Age</th>
+                    <th>IMDb</th>
+                    <th>Rotten Tomatoes</th>
+                    <th>Netflix</th>
+                    <th>Hulu</th>
+                    <th>Prime Video</th>
+                    <th>Disney</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td>{{ row.6 }}</td>
+                    <td>{{ row.7 }}</td>
+                    <td>{{ row.8 }}</td>
+                    <td>{{ row.9 }}</td>
+                    <td>{{ row.10 }}</td>
+                    <td>{{ row.11 }}</td>
+                    <td>{{ row.12 }}</td>
+                    <td>{{ row.13 }}</td>
+                    <td>{{ row.14 }}</td>
+                    <td>{{ row.15 }}</td>
+                    <td>{{ row.16 }}</td>
+                    <td>{{ row.17 }}</td>
+                    <td>{{ row.18 }}</td>
+                    <td>{{ row.19 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="19">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+</body>
+</html>

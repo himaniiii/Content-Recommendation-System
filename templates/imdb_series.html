@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Series</title>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    /* Custom styles for specific columns can be added here */
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <!-- Header content -->
+    </header>
+    <main class="main-content">
+        <h2>IMDB </h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Description</th>
+                    <th>Director</th>
+                    <th>Cast</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td> <!-- Rank -->
+                    <td>{{ row.1 }}</td> <!-- Title -->
+                    <td>{{ row.2 }}</td> <!-- Genre -->
+                    <td>{{ row.3 }}</td> <!-- Description -->
+                    <td>{{ row.4 }}</td> <!-- Director -->
+                    <td>{{ row.5 }}</td> <!-- Cast -->
+                    <td>{{ row.6 }}</td> <!-- Year -->
+                    <td>{{ row.7 }}</td> <!-- Rating -->
+                    <td>{{ row.8 }}</td> <!-- Votes -->
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="10">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+</body>
+</html>

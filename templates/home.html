@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Recommendation</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script>
+        function updateSortingOptions() {
+            var contentTypeSelect = document.getElementById('content-type');
+            var sortingTypeSelect = document.getElementById('sorting-type');
+            sortingTypeSelect.innerHTML = '';
+            var sortingOptions = {
+                'action': [
+                    {value: 'Rating', text: 'Rating'},
+                    {value: 'Number_of_votes', text: 'Number of votes'},
+                    {value: 'Release_Year', text: 'Release Year'}
+                ],
+
+                'adventure': [
+                    {value: 'Rating', text: 'Rating'},
+                    {value: 'Number_of_votes', text: 'Number of Votes'},
+                    {value: 'Release_Year', text: 'Release Year'}
+                ],
+
+                'animation': [
+                    {value: 'Rating', text: 'Rating'},
+                    {value: 'Number_of_votes', text: 'Number of votes'},
+                    {value: 'Release_Year', text: 'Release Year'}
+                ],
+                'tv': [
+                    {value: 'Rating', text: 'Rating'},
+                    {value: 'Age', text: 'Age'},
+                    {value: 'Release_Year', text: 'Release Year'},
+                    {value: 'Netflix', text: 'Availability on Netflix'},
+                    {value: 'Hulu', text: 'Availability on Hulu'},
+                    {value: 'Prime', text: 'Availability on Prime'},
+                    {value: 'Disney', text: 'Availability on Disney'}
+                ],
+                'youtube': [
+                    {value: 'Subscribers', text: 'Rating'},
+                    {value: 'Video_Views', text: 'Video Views'},
+                    {value: 'Category', text: 'Category'},
+                ],
+                'imdb': [
+                    {value: '`Rank`', text: 'Rank'},
+                    {value: 'Genre', text: 'Genre'},
+                    {value: 'Release_Year', text: 'Release Year'},
+                    {value: 'Rating', text: 'Rating'},
+                    {value: 'Votes', text: 'Votes'}
+                ],
+                'instagram': [
+                    {value: '`Rank`', text: 'Rank'},
+                    {value: 'Followers', text: 'Followers'},
+                    {value: 'ChannelInfo', text: 'Channel Info'},
+                    {value: '60_Day_Eng_Rate', text: 'Eng Rate'},
+                ],
+                'Movie_TV_Data': [
+                    {value: 'Movie_Rank', text: 'Rank'},
+                    {value: 'Movie_Title', text: 'Title'},
+                    {value: 'Movie_Genre', text: 'Genre'},
+                    {value: 'Year', text: 'Release Year'},
+                    {value: 'Movie_Rating', text: 'Rating'},
+                    {value: 'Movie_Votes', text: 'Votes'},
+                    {value: 'Movie_Metascore', text: 'Metascore'}
+                ],
+                'Social_Media_Info': [
+                    {value: 'Channel_Info', text: 'Title'},
+                    {value: 'Influencer_Score', text: 'Influencer Score'},
+                    {value: 'Followers', text: 'Followers'},
+                    {value: 'Avg_Likes', text: 'Average Likes'},
+                    {value: 'Youtuber', text: 'Youtuber'},
+                    {value: 'Subscribers', text: 'Subscribers'},
+                    {value: 'Video_Views', text: 'Video Views'},
+                    {value: 'Category', text: 'Category'},
+                    {value: 'Uploads', text: 'Uploads'},
+                    {value: 'Country', text: 'Country'},
+                    {value: 'Channel_Type', text: 'Channel Type'},
+                    {value: 'Video_Views_Rank', text: 'Video Views Rank'},
+                    {value: 'Country_Rank', text: 'Country Rank'},
+                    {value: 'Channel_Type_Rank', text: 'Channel_Type Rank'},
+                    {value: 'Video_Views_For_The_Last_30_Days', text: 'Video Views in the Last 30 Days'},
+                    {value: 'Subscribers_For_Last_30_Days', text: 'Subscribers in the Last 30 Days'},
+                ],
+                'Series_Info': [
+                    {value: 'Title', text: 'Title'},
+                    {value: 'Release_Year', text: 'Release Year'},
+                    {value: 'Genre', text: 'Genre'},
+                    {value: 'Rating', text: 'Rating'}
+                ]
+            };
+
+            var selectedContentType = contentTypeSelect.value;
+
+            var options = sortingOptions[selectedContentType] || [];
+
+            options.forEach(function(option) {
+                var newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.text = option.text;
+                sortingTypeSelect.appendChild(newOption);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('content-type').addEventListener('change', updateSortingOptions);
+            updateSortingOptions();
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        
+        <div class="sorting-selector">
+            <form action="{% url 'fetch_sorted_series' %}" method="get">
+                <label for="content-type" class="content-label">Select your content</label>
+                <select id="content-type" name="content_type" class="dropdown">
+                    <option value="action">Action</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="animation">Animation</option>
+                    <option value="tv">TV</option>
+                    <option value="youtube">Youtube</option>
+                    <option value="imdb">IMDB</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="Movie_TV_Data">Movie TV Data</option>
+                    <option value="Social_Media_Info">Social Media Info</option>
+                    <option value="Series_Info">Series Info</option>
+                    <!-- Other options -->
+                </select>
+
+                <label for="sorting-type" class="sorting-label">Sort by</label>
+                <select id="sorting-type" name="sort_by" class="dropdown">
+                    <!-- Options for general sorting -->
+                    <option value="rating">Rating</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+
+                    <!-- Options specific to 'tv' content type -->
+                    <optgroup label="TV Options">
+                        <option value="Rating">Rating</option>
+                        <option value="Age">Age</option>
+                        <option value="Release_Year">Release Year</option>
+                        <option value="Netflix">Netflix</option>
+                        <option value="Hulu">Hulu</option>
+                        <option value="Prime">Prime</option>
+                        <option value="Disney">Disney</option>
+                    </optgroup>
+
+                    <!-- Options specific to 'youtube' content type -->
+                    <optgroup label="YouTube Options">
+                        <option value="Subscribers">Subscribers</option>
+                        <option value="Video_Views">Video Views</option>
+                        <option value="Country">Country</option>
+                        <option value="Category">Category</option>
+                        <option value="Youtuber">Youtuber</option>
+                    </optgroup>
+                </select>
+
+                <button type="submit" class="search-button">Go</button>
+            </form>
+        </div>
+        <!-- Additional dropdown for sorting -->
+        <div class="search-bar">
+            <form action="{% url 'your_search_view_name' %}" method="get">
+                <label for="search-query" class="search-label">Search:</label>
+                <input type="text" id="search-query" name="search_query" class="search-input" placeholder="Enter your search query">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </header>
+    <main class="main-content">
+        <a href="{% url 'fetch_action_series' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>Action</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_youtube_content' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>Youtube</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_tv_series' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>TV</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_adventure_series' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>Adventure</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_instagram_content' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>Instagram</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_imdb_content' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>IMDB</h2>
+                <!-- Images and titles for action movies or shows -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_animation_series' %}">
+            <!-- Content blocks will be dynamic, example for action genre -->
+            <div class="content-block action">
+                <h2>Animation</h2>
+            </div>
+        </a>
+        <a href="{% url 'fetch_movie_tv_data' %}">
+            <div class="content-block movie-tv-data">
+                <h2>Movies & TV </h2>
+                <!-- Images and titles for Movie & TV Data -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_social_media_info' %}">
+            <div class="content-block social-media-info">
+                <h2>Social Media</h2>
+                <!-- Images and titles for Social Media Info -->
+            </div>
+        </a>
+        <a href="{% url 'fetch_series_info' %}">
+            <div class="content-block series-info">
+                <h2>Series Info</h2>
+                <!-- Images and titles for Series Info -->
+            </div>
+        </a>
+    </main>
+    <footer class="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+<script src="{% static 'script.js' %}"></script>
+</body>
+</html>

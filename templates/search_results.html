@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Add your CSS styles or link to a stylesheet if needed -->
+</head>
+<body>
+    <div class="container">
+        <h1>Recommendations</h1>
+
+        {% if similarity_results %}
+            
+            <ul>
+                {% for result in similarity_results %}
+                    <li>{{ result.0 }}: {{ result.1 }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No similarity results found.</p>
+        {% endif %}
+
+        <!-- Add any additional content or styling here -->
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Series</title>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    /* Custom styles for specific columns can be added here */
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <!-- Header content -->
+    </header>
+    <main class="main-content">
+        <h2>TV Series</h2>
+       
+        <table>
+            <thead>
+                <tr>
+                    <th>UID</th>
+                    <th>Title</th>
+                    <th>Release Year</th>
+                    <th>Age</th>
+                    <th>IMDb</th>
+                    <th>Rotten Tomatoes</th>
+                    <th>Netflix</th>
+                    <th>Hulu</th>
+                    <th>Prime Video</th>
+                    <th>Disney+</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td> <!-- UID -->
+                    <td>{{ row.1 }}</td> <!-- Title -->
+                    <td>{{ row.2 }}</td> <!-- Release Year -->
+                    <td>{{ row.3 }}</td> <!-- Age -->
+                    <td>{{ row.4 }}</td> <!-- IMDb -->
+                    <td>{{ row.5 }}</td> <!-- Rotten Tomatoes -->
+                    <td>{{ row.6 }}</td> <!-- Netflix -->
+                    <td>{{ row.7 }}</td> <!-- Hulu -->
+                    <td>{{ row.8 }}</td> <!-- Prime Video -->
+                    <td>{{ row.9 }}</td> <!-- Disney+ -->
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="10">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+</body>
+</html>

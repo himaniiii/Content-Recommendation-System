@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Info</title>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <!-- Header content -->
+    </header>
+    <main class="main-content">
+        <h2>Social Media Info</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Channel Info</th>
+                    <th>Influence Score</th>
+                    <th>Posts</th>
+                    <th>Followers</th>
+                    <th>Average Likes</th>
+                    <th>60 Day Engagement Rate</th>
+                    <th>New Post Average Like</th>
+                    <th>Total Likes</th>
+                    <th>Youtuber</th>
+                    <th>Subscribers</th>
+                    <th>Video Views</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Uploads</th>
+                    <th>Country</th>
+                    <th>Channel Type</th>
+                    <th>Video Views Rank</th>
+                    <th>Country Rank</th>
+                    <th>Channel Type Rank</th>
+                    <th>Video Views for the Last 30 Days</th>
+                    <th>Subscribers for Last 30 Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td>{{ row.6 }}</td>
+                    <td>{{ row.7 }}</td>
+                    <td>{{ row.8 }}</td>
+                    <td>{{ row.9 }}</td>
+                    <td>{{ row.10 }}</td>
+                    <td>{{ row.11 }}</td>
+                    <td>{{ row.12 }}</td>
+                    <td>{{ row.13 }}</td>
+                    <td>{{ row.14 }}</td>
+                    <td>{{ row.15 }}</td>
+                    <td>{{ row.16 }}</td>
+                    <td>{{ row.17 }}</td>
+                    <td>{{ row.18 }}</td>
+                    <td>{{ row.19 }}</td>
+                    <td>{{ row.20 }}</td>
+                    <td>{{ row.21 }}</td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="22">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+</body>
+</html>
